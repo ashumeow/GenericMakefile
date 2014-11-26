@@ -7,6 +7,7 @@ dependency lists.
 
 #Features:
 * Automatically finds and compiles all source files within the source directory.
+* Compiles most recently modified files first, to hopefully find problems earlier.
 * Automatically generates dependecies as files are compiled, ensuring that files are correctly recompiled when dependecies have updated.
 * Includes configurations for normal (release) build and debug build suitable for GDB debugging.
 * Times the compilation of each file and the entire build.
@@ -21,8 +22,11 @@ Tags should be made in the format "vMAJOR.MINOR.PATCH[-description]", where MAJO
 * VERSION_REVISION (int) - The number of commits since the most recent tag.
 * VERSION_HASH (string) - The SHA of the current commit. Includes the "-dirty" suffix if there are uncommited changes.
 
+If the makefile is not used in a git repository, or is in a repository with no tags, the version macros are not created.
+
 #Limitations:
 * Assumes GNU make.
+* Timing does not work correctly with MacOS. See issue #6 for a workaround patch that allows timing in seconds on Mac.
 * Doesn't really support multiple types of source files in the same project.
 * No easy way to exclude files from the build. You can either change the
   extension of files to be excluded, or use preprocessor flags for
